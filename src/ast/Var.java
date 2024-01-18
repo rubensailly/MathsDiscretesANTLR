@@ -12,6 +12,10 @@ public class Var extends Term{
 
     @Override
     public Value interp(Env e) {
-        return null;
+        if (e.lookup(name).isPresent()){
+            return e.lookup(name).get();
+        }else{
+            return null;
+        }
     }
 }

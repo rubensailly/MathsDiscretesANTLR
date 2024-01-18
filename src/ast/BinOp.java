@@ -1,6 +1,7 @@
 package ast;
 
 import interp.Env;
+import interp.IntVal;
 import interp.Value;
 
 public class BinOp extends Term {
@@ -15,12 +16,14 @@ public class BinOp extends Term {
 
     @Override
     public Value interp(Env e) {
+        int t1 = ((IntVal) term1.interp(e)).value;
+        int t2 = ((IntVal) term2.interp(e)).value;
 
         return switch(op){
-            case PLUS -> term1 + term2;
-            case MINUS -> term1 - term2;
-            case DIVIDE -> term1 / term2;
-            case TIMES -> term1 * term2;
-        }
+            case PLUS -> new IntVal(t1 + t2);
+            case MINUS -> new IntVal(t1 - t2);
+            case DIVIDE -> new IntVal(t1 / t2);
+            case TIMES -> new IntVal(t1 * t2);
+        };
     }
 }
