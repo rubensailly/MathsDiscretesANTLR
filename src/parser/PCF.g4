@@ -3,14 +3,16 @@ grammar PCF;
 // règles syntaxiques
 
 program : term EOF ;
-term : LIT                                   # Lit
-     | VARIABLE                              # Var
+term : VARIABLE                              # Var
+     | term term                             # App
+     | LIT                                   # Lit
+     | '(' term ')'                          # Par
      | term OP2 term                         # BinOp
      | term OP term                          # BinOp
-     | 'var' VARIABLE '=' term               # Var
-     | 'let' term '=' term 'in' term         # Let
+//     | 'var' VARIABLE '=' term               # Var
+     | 'let' VARIABLE '=' term 'in' term     # Let
      | 'ifz' term 'then' term 'else' term    # Cond
-     | '(' term ')'                          # Par
+     | 'fun' VARIABLE '->' term              # Fun
      ;
 
 // règles lexicales

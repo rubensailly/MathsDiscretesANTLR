@@ -14,12 +14,12 @@ public class NonEmptyEnv extends Env {
 
     @Override
     Binding last() {
-        return this.last;
+        return last;
     }
 
     @Override
     Env previous() {
-        return this.previous;
+        return previous;
     }
 
     @Override
@@ -30,10 +30,10 @@ public class NonEmptyEnv extends Env {
 
     @Override
     public Optional<Value> lookup(String id) {
-        if (this.last.name.equals(id)){
-            return Optional.ofNullable(this.last.value);
+        if (last().name.equals(id)){
+            return Optional.ofNullable(last().value);
         }else {
-            return previous.lookup(id);
+            return previous().lookup(id);
         }
     }
 }

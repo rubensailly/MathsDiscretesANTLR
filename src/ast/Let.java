@@ -4,11 +4,11 @@ import interp.Env;
 import interp.Value;
 
 public class Let extends Term{
-    public Term Variable;
+    public String Variable;
     public Term t1; // non zero
     public Term t2;
 
-    public Let(Term test, Term branchTrue, Term branchFalse) {
+    public Let(String test, Term branchTrue, Term branchFalse) {
         this.Variable = test;
         this.t1 = branchTrue;
         this.t2 = branchFalse;
@@ -16,6 +16,8 @@ public class Let extends Term{
 
     @Override
     public Value interp(Env e) {
-        return null;
+        //e = e.add(Variable, t1.interp(e));
+        e.add(Variable, t1.interp(e));
+        return t2.interp(e);
     }
 }
